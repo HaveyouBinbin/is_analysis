@@ -3,7 +3,7 @@
 
 # 《信息系统分析与设计》（第4版）
 
-![book](../is_analysis/book.jpg)
+![book](book.jpg)
 
 清华大学出版社 王晓敏 邝孔武 编著
 
