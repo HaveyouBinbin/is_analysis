@@ -1,0 +1,42 @@
+@startuml
+@startuml
+|#ffede1|教务处|
+start
+    :考试安排;
+    :考试安排表]
+    |#F9FBF2|教师|
+        :出卷;
+    split
+        :A、B试卷|
+    split again
+        |#D7F9FF|系主任|
+            :审批签字;
+            :打印审批表]
+    end split
+|教务处|
+    :打印试卷;
+    :试卷]
+|#AFCBFF|学生|
+    :参加考试;
+    :答卷]
+|教师|
+    :阅卷出成绩]
+    fork
+        |教务处|
+            :成绩单]
+        if( 有不及格？) then( 有 )
+            :安排补考;
+            split
+                :补考安排表]
+                detach
+            split again
+            end split
+        endif
+    fork again
+        |教师|
+            :答卷]
+            :装订存档;
+    end fork;
+    :期末流程结束;
+stop
+@enduml
