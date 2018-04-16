@@ -1,0 +1,36 @@
+@startuml
+
+class Reader{
+    +String  reader_ID
+    +String  reader_Name
+    +String  reader_Sex
+    +String  reader_Address
+    +String  reader_Borrowed
+    +int  BorrowNum
+    +int  BorrowDays
+    +searchPersonalInformation()
+    +searchBorrowInformation()
+    +searchForBook()
+    +reservationBook()
+    +cancelReservation()
+    +borrowBook()
+    +returnBook()
+}
+
+class Administrator{
+    +String  admin_ID
+    +String  admin_Name
+    +String  admin_Sex
+    +String  admin_
+    +int  BorrowNum
+    +int  BorrowDays
+    +searchPersonalInformation()
+    +searchBorrowInformation()
+    +searchForBook()
+    +reservationBook()
+    +cancelReservation()
+    +borrowBook()
+    +returnBook()
+}
+
+@enduml

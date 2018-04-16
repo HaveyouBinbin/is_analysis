@@ -1,5 +1,4 @@
 @startuml
-@startuml
 |#ffede1|教务处|
 start
     :考试安排;

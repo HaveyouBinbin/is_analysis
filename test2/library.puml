@@ -1,0 +1,82 @@
+@startuml
+top to bottom direction
+skinparam packageStyle rectangle
+actor 系统管理员 as administrator
+actor 图书管理员 as librarian
+actor 读者 as reader
+actor 游客 as visitor
+
+visitor <|- reader
+librarian <|- administrator
+
+rectangle  {
+    left to right direction
+ 	(查询个人信息) <- reader
+ 	(查询借阅信息) <- reader
+ 	(预定图书) <- reader
+ 	(取消预定) <- reader
+ 	(租借图书) <- reader
+ 	(归还图书) <- reader
+ 	(查询图书信息) <- reader
+
+ 	(查询图书信息) <- visitor
+
+    (预定图书) .> (取消预定) : extends
+    (租借图书) .> (归还图书) : extends
+    (归还图书) .> (违约罚款) : include
+
+ }
+
+rectangle  {
+    left to right direction
+	administrator -right-> (添加读者)
+	administrator -right-> (删除读者)
+	administrator -right-> (修改读者信息)
+	administrator -right-> (添加图书管理员)
+	administrator -right-> (删除图书管理员)
+	administrator -right-> (修改图书管理员)
+
+	librarian -right-> (处理借书)
+	librarian -right-> (处理还书)
+	librarian -right-> (添加图书)
+	librarian -right-> (删除图书)
+	librarian -right-> (维护读者信息)
+
+    (添加读者) .> (删除读者) : extends
+    (添加读者) .> (修改读者信息) : extends
+    (添加图书管理员) .> (删除图书管理员) : extends
+    (添加图书管理员) .> (修改图书管理员信息) : extends
+    (添加图书) .> (删除图书) : extends
+
+}
+
+	(图书管理) <.left. (添加图书) : extends
+	(图书管理) .left.> (删除图书) : include
+	(图书管理) .left.> (处理借书) : include
+	(图书管理) .left.> (处理还书) : include
+	(图书管理) .> (查询图书信息) : include
+	(图书管理) .> (查询借阅信息) : include
+	(图书管理) .> (租借图书) : include
+	(图书管理) .> (归还图书) : include
+
+	(读者管理) <.left. (添加读者) : extends
+	(读者管理) .left.> (删除读者) : include
+	(读者管理) .left.> (修改读者信息) : include
+	(读者管理) .left.> (维护读者信息) : include
+	(读者管理) .> (查询个人信息) : include
+
+	(图书管理员管理) <.left. (添加图书管理员) : extends
+	(图书管理员管理) .left.> (删除图书管理员) : include
+	(图书管理员管理) .left.> (修改图书管理员信息) : include
+
+skinparam handwritten true
+skinparam usecase {
+	BackgroundColor YellowGreen
+	BorderColor DarkSlateGray
+	ArrowColor Olive
+	ActorBorderColor black
+	ActorFontName Courier
+
+}
+
+@enduml
