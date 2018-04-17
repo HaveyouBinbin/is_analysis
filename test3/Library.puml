@@ -1,36 +1,112 @@
 @startuml
 
-class Reader{
-    +String  reader_ID
-    +String  reader_Name
-    +String  reader_Sex
-    +String  reader_Address
-    +String  reader_Borrowed
-    +int  BorrowNum
-    +int  BorrowDays
-    +searchPersonalInformation()
-    +searchBorrowInformation()
-    +searchForBook()
-    +reservationBook()
-    +cancelReservation()
-    +borrowBook()
-    +returnBook()
-}
+package Bean <<Cloud>> #DDDDDD {
 
-class Administrator{
-    +String  admin_ID
-    +String  admin_Name
-    +String  admin_Sex
-    +String  admin_
-    +int  BorrowNum
-    +int  BorrowDays
-    +searchPersonalInformation()
-    +searchBorrowInformation()
-    +searchForBook()
-    +reservationBook()
-    +cancelReservation()
-    +borrowBook()
-    +returnBook()
+    skinparam class {
+    	BackgroundColor PaleGreen
+    	ArrowColor SeaGreen
+    	BorderColor SpringGreen
+    	BackgroundColor<<Foo>> Wheat
+    	BorderColor<<Foo>> Tomato
+    }
+    skinparam stereotypeCBackgroundColor YellowGreen
+    skinparam stereotypeCBackgroundColor<< Foo >> DimGray
+
+    class User<<Foo>>{
+        -String  user_ID
+        -String  reader_Name
+        -String  reader_Sex
+    }
+    note left:User类是用户个人基本信息类，\n超级管理员，图书管理员和读者\n均有基本信息且基本属性相同，\n故三个角色均直接或间接继承此User类
+
+    class Reader{
+        -String  reader_ID
+        -String  reader_userName
+        -String  reader_Password
+        -String  reader_Address
+        -String  reader_reservationBook
+        -String  reader_borrowBook
+    }
+    note right:Reader类是读者类，\n特殊属性:\n预定图书的书目（reader_reservationBook）\n所借图书的书目（reader_borrowBook）
+
+    class Administrator{
+        -String  admin_ID
+        -String  admin_userName
+        -String  admin_Password
+    }
+
+    class Librarian{
+        -String  librarian_ID
+        -String  librarian_userName
+        -String  librarian_Password
+    }
+    Reader -left-|> User:继承
+    Administrator -up-|> User:继承
+    Librarian -up-|> Administrator:继承
+
+    class Books{
+        -String  books_ID
+        -String  books_Name
+        -String  books_Author
+        -float books_Price
+        -short books_Number
+    }
+    note left:Books类是记录书目信息的类，\n属性包括图书的基本信息
+
+    class Item{
+        -String  item_ID
+        -String  item_Name
+        -String  item_Author
+        -float item_Price
+    }
+    note right:Item 类是具体某本书的类，\n属性包括书籍号（item_ID）等
+
+    class Reservation{
+        -String  reservation_ID
+        -String  reservation_UserID
+        -String  reservation_ISBN
+        -Date  reservation_Date
+    }
+    note left:Reservation类是预订信息类，\n属性：预订日期、图书ISBN、\n预订书籍的用户等
+
+    class Borrow{
+        -String  borrow_ID
+        -String  borrow_UserID
+        -String  borrow_ISBN
+        -Date  borrow_Date
+    }
+
+    class Return{
+        -String  return_ID
+        -String  return_UserID
+        -String  return_ISBN
+        -Date  return_Date
+    }
+    class Persistent_store<<Foo>>{
+        -String  persistent_ID
+
+    }
+    note right:Persistent_store类是书籍永久的存储类，\n在数据库中的存储数据，\n其他对与书籍有关的活动都要经过其存储类
+
+    Books -down-|> Persistent_store:继承
+    Item -down-|> Persistent_store:继承
+    Books "1" .left.o "N" Item:包含
+    Reservation -right-|> Persistent_store:继承
+    Borrow -up-|> Persistent_store:继承
+    Return -up-|> Persistent_store:继承
+
+    Books "N" .. "1" Reader:查询
+    Item "N" ..* "1" Reader:拥有和管理
+    Reservation "N" .. "1" Reader:添加或取消
+    Borrow "N" .. "1" Reader:管理
+    Return "N" .. "1" Reader:管理
+
+    Reader "N" .. "1" Administrator:读者管理
+    Librarian "N" .. "1" Administrator:图书管理员管理
+    Books "N" .. "1" Librarian:图书管理
+
+    Books "N" .. "1" Reservation:管理
+
 }
 
 @enduml
