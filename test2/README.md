@@ -97,6 +97,10 @@ skinparam usecase {
 
 ![library](library.png)
 
+更改后第V1.1版本
+
+![library1.1](library(V1.1).png)
+
 ## 2. 参与者说明：
 
 ###     2.1 系统管理员
