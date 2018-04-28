@@ -124,7 +124,11 @@ package Bean <<Cloud>> #DDDDDD {
 
 ### 1.2. 类图如下：
 
+V1.0版本：
 ![class](Library.png)
+
+V1.1版本：
+![class](LIbraryV1.1.png)
 
 ### 1.3. 类图说明：
 ```
