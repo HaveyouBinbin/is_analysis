@@ -230,7 +230,9 @@
 ```
 {
     "info": "你的还书单列表",
-    "data": {
+    "total": 1024,
+    "data": [
+        {
         "return_ID": "xxxx-xxxx-xxx-xxx",
         "return_book": "信息系统分析与设计",
         "borrow_Date": "2018-04-27 10:30",
@@ -240,7 +242,11 @@
         "status_2": "0",
         "effective": "1",
         "path": "http://api.library.com/v1/api/query_return/return_ID/return_list",
-    },
+        },
+        {
+        ...其他还书单
+        }
+    ]
     "code": 200
 }
 ```
@@ -249,7 +255,8 @@
 |参数名称|说明|
 |:-------:|:-------------: |
 |Info|返回的提示信息|
-|data|返回还书单列表内容数据主体\n"return_ID":还书单号\n"return_book": "书名"\n"borrow_Date": "借书日期"\n"return_Date": "还书处理日期"\n"take_Term": "还书期限：提交还书申请后一周内"\n"status_1": "还书处理状态：1表示已处理，0表示未处理"\n"status_2": "线下还书状态：1表示已还书至图书馆，0表示未还书到图书馆"\n"effective": "还书单有效状态：1表示有效，0表示无效"\n"path": "还书单详情链接地址"|
+|total|返回还书单数量|
+|data|返回还书单列表内容数据主体<br>"return_ID":还书单号<br>"return_book": "书名"<br>"borrow_Date": "借书日期"<br>"return_Date": "还书处理日期"<br>"take_Term": "还书期限：提交还书申请后一周内"<br>"status_1": "还书处理状态：1表示已处理，0表示未处理"<br>"status_2": "线下还书状态：1表示已还书至图书馆，0表示未还书到图书馆"<br>"effective": "还书单有效状态：1表示有效，0表示无效"<br>"path": "还书单详情链接地址"|
 |code|返回码|
 
 2. 添加还书申请
@@ -293,7 +300,7 @@
 |参数名称|说明|
 |:-------:|:-------------: |
 |Info|返回的提示信息|
-|data|返回需还书的详情数据主体\n"return_ID":还书单号\n"user_ID": "用户id"\n"librarianID_borrow": "线上图书管理员ID"\n"librarianID_take": "还书处理管理员ID"\n"ISBN": "ISBN"\n"return_book": "书名"\n"reservation_Date":"预约日期"\n"borrow_Date": "借书日期"\n"return_Date": "还书处理日期"\n"take_Term": "还书期限：提交还书申请后一周内"\n"take_Date":"线下还书日期"\n"status_1": "还书处理状态：1表示已处理，0表示未处理"\n"status_2": "线下还书状态：1表示已还书至图书馆，0表示未还书到图书馆"\n"effective": "还书单有效状态：1表示有效，0表示无效"\n"path": "还书单详情链接地址"|
+|data|返回需还书的详情数据主体<br>"return_ID":还书单号<br>"user_ID": "用户id"<br>"librarianID_borrow": "线上图书管理员ID"<br>"librarianID_take": "还书处理管理员ID"<br>"ISBN": "ISBN"<br>"return_book": "书名"<br>"reservation_Date":"预约日期"<br>"borrow_Date": "借书日期"<br>"return_Date": "还书处理日期"<br>"take_Term": "还书期限：提交还书申请后一周内"<br>"take_Date":"线下还书日期"<br>"status_1": "还书处理状态：1表示已处理，0表示未处理"<br>"status_2": "线下还书状态：1表示已还书至图书馆，0表示未还书到图书馆"<br>"effective": "还书单有效状态：1表示有效，0表示无效"<br>"path": "还书单详情链接地址"|
 |code|返回码|
 
 3. 处理失效申请
@@ -329,7 +336,7 @@
 |参数名称|说明|
 |:-------:|:-------------: |
 |Info|返回的提示信息|
-|data|返回处理失效申请主要数据主体\n"return_ID":还书单号\n"return_book": "书名"\n"effective":"还书单失效原因"\n"manage": "处理类型：1.逾期交钱；2.损坏交钱；3.遗失交钱；4.遗失购买新书还书等"|
+|data|返回处理失效申请主要数据主体<br>"return_ID":还书单号<br>"return_book": "书名"<br>"effective":"还书单失效原因"<br>"manage": "处理类型：1.逾期交钱；2.损坏交钱；3.遗失交钱；4.遗失购买新书还书等"|
 |code|返回码|
 
 4. 确认还书并评价
