@@ -125,8 +125,8 @@
 |字段|类型|主键，外键|可以为空|默认值|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:----:|:-----|
 |reservation_ID|varchar2(100)|主键|否|||预约单号|
-|reader_ID|varchar2(100)|联合主键1，\n外键|否|||读者编号，Reader表的主键|
-|ISBN|varchar2(100)|联合主键2，\n外键|否|||读者预约的图书的ISBN，Item表的主键|
+|reader_ID|varchar2(100)|联合主键1，<br>外键|否|||读者编号，Reader表的主键|
+|ISBN|varchar2(100)|联合主键2，<br>外键|否|||读者预约的图书的ISBN，Item表的主键|
 |librarianID|varchar2(100)|外键|是|||处理该预订书单的图书管理员ID，Librarian表的主键|
 |reservation_book|varchar2(10)| |否|||预约书籍|
 |reservation_Date|varchar2(10)| |否|||预约日期|
@@ -147,9 +147,9 @@
 |字段|类型|主键，外键|可以为空|默认值|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:----:|:-----|
 |borrow_ID|varchar2(100)|主键|否|||借书单号|
-|reader_ID|varchar2(100)|联合主键1，\n外键|否|||读者编号，Reader表的主键|
-|ISBN|varchar2(100)|联合主键2，\n外键|否|||读者借阅图书的ISBN，Item表的主键|
-|reservation_ID|varchar2(100)|联合主键3，\n外键|否|||读者预订书单的编号，Reservation表的主键|
+|reader_ID|varchar2(100)|联合主键1，<br>外键|否|||读者编号，Reader表的主键|
+|ISBN|varchar2(100)|联合主键2，<br>外键|否|||读者借阅图书的ISBN，Item表的主键|
+|reservation_ID|varchar2(100)|联合主键3，<br>外键|否|||读者预订书单的编号，Reservation表的主键|
 |librarianID|varchar2(100)|外键|是|||线上处理该借书单的图书管理员ID，Librarian表的主键|
 |librarianID_take|varchar2(100)|外键|否|||线下领书处理管理员ID，Librarian表的主键|
 |borrow_book|varchar2(10)| |否|||书籍信息|
@@ -182,9 +182,9 @@
 |字段|类型|主键，外键|可以为空|默认值|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:----:|:-----|
 |return_ID|varchar2(100)|主键|否|||还书单号|
-|reader_ID|varchar2(100)|联合主键1，\n外键|否|||读者编号，Reader表的主键|
-|ISBN|varchar2(100)|联合主键2，\n外键|否|||读者返还图书的ISBN，Item表的主键|
-|borrow_ID|varchar2(100)|联合主键3，\n外键|否|||读者借书单的编号，Borrow表的主键|
+|reader_ID|varchar2(100)|联合主键1，<br>外键|否|||读者编号，Reader表的主键|
+|ISBN|varchar2(100)|联合主键2，<br>外键|否|||读者返还图书的ISBN，Item表的主键|
+|borrow_ID|varchar2(100)|联合主键3，<br>外键|否|||读者借书单的编号，Borrow表的主键|
 |librarianID|varchar2(100)|外键|是|||线上处理该还书单的图书管理员ID，Librarian表的主键|
 |librarianID_take|varchar2(100)|外键|否|||线下领书处理管理员ID，Librarian表的主键|
 |return_book|varchar2(10)| |否|||书籍信息|
