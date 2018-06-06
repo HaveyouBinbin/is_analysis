@@ -1,0 +1,78 @@
+@startuml
+left to right direction
+title 基于GitHub的学生实验管理平台--用例图
+actor 用户 as users
+actor 学生 as students
+actor 教师 as teachers
+actor 教务管理员 as EduAdmin
+actor 系统管理员 as SysAdmin
+
+users <|-- SysAdmin
+users <|-- EduAdmin
+users <|-right- teachers
+users <|-- students
+
+package 用户操作用例集 #BCB6FF{
+users --up-> (查看成绩)
+users --up-> (首页显示用户列表)
+users --up-> (登录)
+users --up-> (登出)
+users --up-> (修改密码)
+users --up-> (查看个人信息)
+users --up-> (修改个人信息)
+(修改个人信息) .> (查看个人信息):include
+}
+package 用户用例集 #B8E1FF{
+SysAdmin --up-> (删除用户)
+SysAdmin --up-> (修改用户)
+SysAdmin --up-> (添加用户)
+rectangle #B8E1FF{
+(修改用户) .left.> (查看用户):include
+(删除用户) .left.> (查看用户):include
+}
+}
+package 课程用例集 #A9FFF7{
+EduAdmin -> (删除课程)
+EduAdmin -> (修改课程)
+EduAdmin -> (添加课程)
+rectangle #A9FFF7{
+(修改课程) .> (查看课程):include
+(删除课程) .> (查看课程):include
+}
+}
+package 实验用例集 #94FBAB{
+teachers -up-> (删除实验)
+teachers -up-> (修改实验)
+teachers -up-> (添加实验)
+rectangle #94FBAB{
+(修改实验) .left.> (查看实验):include
+(删除实验) .left.> (查看实验):include
+}
+}
+package 评分项用例集 #94FBAB{
+teachers --> (添加评分项)
+teachers --> (修改评分项)
+teachers --> (删除评分项)
+rectangle #94FBAB{
+(修改评分项) .> (查看评分项):include
+(删除评分项) .> (查看评分项):include
+}
+}
+package 业务用例集 #82ABA1{
+EduAdmin --> (发布课程)
+EduAdmin --> (审核选课)
+students --> (选课)
+teachers --> (选课)
+teachers --> (评定成绩)
+}
+
+
+skinparam usecase {
+	BackgroundColor GreenYellow
+	BorderColor DarkSlateGray
+	ArrowColor Olive
+	ActorBorderColor black
+	ActorFontName Courier
+}
+
+@enduml

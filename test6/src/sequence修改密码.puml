@@ -1,0 +1,28 @@
+@startuml
+title 基于GitHub的实验管理平台--修改密码用例的顺序图
+actor users
+alt 如果users是系统管理员
+	users -> sysAdmin:录入并提交修改后的系统管理员的密码
+else 如果users是教务管理员
+    users -> eduAdmin:录入并提交修改后的教务管理员的密码
+else 如果users是教师
+    users -> teachers:录入并提交修改后的教师的密码
+else 如果users是学生
+    users -> students:录入并提交修改后的学生的密码
+end
+
+skinparam sequence {
+	ArrowColor DeepSkyBlue
+	ActorBorderColor DeepSkyBlue
+	LifeLineBorderColor blue
+	LifeLineBackgroundColor #A9DCDF
+	ParticipantBorderColor DeepSkyBlue
+	ParticipantBackgroundColor DodgerBlue
+	ParticipantFontName Impact
+	ParticipantFontSize 17
+	ParticipantFontColor #A9DCDF
+	ActorBackgroundColor aqua
+	ActorFontSize 17
+	ActorFontName Aapex
+}
+@enduml

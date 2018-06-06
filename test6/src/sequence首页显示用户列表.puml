@@ -1,0 +1,55 @@
+@startuml
+title 基于GitHub的实验管理平台--首页显示用户列表用例的顺序图
+users -> users: 查看用户信息
+activate users
+alt 如果users是系统管理员
+    note right #aqua: 如果users是系统管理员，分别列出教务管理员、\n教师和学生基本信息，可进行增删查改操作
+    users -> eduAdmin
+    activate eduAdmin
+	eduAdmin --> users:教务管理员id、姓名和所属部门
+	deactivate eduAdmin
+    users -> teachers
+    activate teachers
+	teachers --> users:教师id、姓名和所属部门
+	deactivate teachers
+    users -> students
+    activate students
+	students --> users:学生id、姓名和班级
+	deactivate students
+else 如果users是教务管理员
+    users -> teachers
+    activate teachers
+    note right #aqua: 如果users是系统管理员，\n分别列出教师和学生基本信息
+	teachers --> users:教师用户id、姓名、所属部门、实验和成绩
+	deactivate teachers
+    users -> students
+    activate students
+	students --> users:学生用户id、姓名、班级、实验和成绩
+	deactivate students
+else 如果users是教师
+    users -> students
+    activate students
+    students --> users:学生用户id、姓名、班级、GitHub用户名和所有学生的课程成绩
+	deactivate students
+else 如果users是学生
+    users -> students
+    activate students
+    students --> users:学生用户id、姓名、班级、实验和自己的课程成绩
+	deactivate students
+end
+
+skinparam sequence {
+	ArrowColor DeepSkyBlue
+	ActorBorderColor DeepSkyBlue
+	LifeLineBorderColor blue
+	LifeLineBackgroundColor #A9DCDF
+	ParticipantBorderColor DeepSkyBlue
+	ParticipantBackgroundColor DodgerBlue
+	ParticipantFontName Impact
+	ParticipantFontSize 17
+	ParticipantFontColor #A9DCDF
+	ActorBackgroundColor aqua
+	ActorFontSize 17
+	ActorFontName Aapex
+}
+@enduml

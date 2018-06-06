@@ -1,0 +1,212 @@
+@startuml
+title 基于GitHub的实验管理平台--类图
+left to right direction
+package 表现层：边界类or窗口类 #FDFDFD {
+
+    skinparam class {
+    	BackgroundColor PaleGreen
+    	ArrowColor SeaGreen
+    	BorderColor SpringGreen
+    	BackgroundColor<<Foo>> Wheat
+    	BorderColor<<Foo>> Tomato
+    }
+    skinparam stereotypeCBackgroundColor YellowGreen
+    skinparam stereotypeCBackgroundColor<< Foo >> DimGray
+
+    class mainWindow{
+    }
+    note right:首页类
+    class loginWindow{
+    }
+    note right:登录页面类
+    class maintainUserInfoWindow{
+    }
+    note right:维护个人信息页面类：包括查看和修改个人信息，修改密码
+
+    class maintainUserWindow{
+    }
+    note right:维护用户页面类：包括添加、查看、修改和删除用户
+    class maintainCoursesWindow{
+    }
+    note right:维护课程页面类：包括添加、查看、修改和删除课程
+    class maintainTestsWindow{
+    }
+    note right:维护实验页面类：包括添加、查看、修改和删除实验
+    class maintainScoreWindow{
+    }
+    note right:维护评分项页面类：包括添加、查看、修改和删除评分项
+    class operationCoursesWindow{
+    }
+    note right:课程操作页面类：包括发布课程、选课和审核选课
+    class queryGradesWindow{
+    }
+    note right:查看成绩页面类
+    class evaluateGradesWindow{
+    }
+    note right:评定成绩页面类
+
+    loginWindow "1"."1" mainWindow
+    mainWindow "1".right."n" maintainUserInfoWindow
+    mainWindow "1".right."n" maintainUserWindow
+    maintainCoursesWindow "n".."1" mainWindow
+    maintainTestsWindow "n".."1" mainWindow
+    mainWindow "1".right."n" maintainScoreWindow
+    operationCoursesWindow "n".."1" mainWindow
+    QueryGradesWindow "1".left."1" evaluateGradesWindow
+
+}
+
+
+package 控制层：控制类 #FFFDDD {
+
+    skinparam class {
+    	BackgroundColor PaleGreen
+    	ArrowColor SeaGreen
+    	BorderColor SpringGreen
+    	BackgroundColor<<Foo>> Wheat
+    	BorderColor<<Foo>> Tomato
+    }
+    skinparam stereotypeCBackgroundColor YellowGreen
+    skinparam stereotypeCBackgroundColor<< Foo >> DimGray
+
+    class Maintain<<Foo>>{
+    }
+    note right:Maintain类是维护类
+    class MaintainUserInfo{
+    }
+    class MaintainUsers{
+    }
+    class MaintainCourses{
+    }
+    class MaintainTests{
+    }
+    class MaintainScores{
+    }
+    MaintainUserInfo -left-|> Maintain:继承
+    MaintainUsers -right-|> Maintain:继承
+    MaintainCourses -up-|> Maintain:继承
+    MaintainTests -down-|> Maintain:继承
+    MaintainScores -down-|> Maintain:继承
+
+    class QueryGrades{
+    }
+    class EvaluateGrades{
+    }
+    QueryGrades "1" .. "1" EvaluateGrades
+
+}
+
+package 领域层：实体类or领域类 #DDDFFF {
+    skinparam class {
+    	BackgroundColor PaleGreen
+    	ArrowColor SeaGreen
+    	BorderColor SpringGreen
+    	BackgroundColor<<Foo>> Wheat
+    	BorderColor<<Foo>> Tomato
+    }
+    skinparam stereotypeCBackgroundColor YellowGreen
+    skinparam stereotypeCBackgroundColor<< Foo >> DimGray
+
+    class Users<<Foo>>{
+        <b>user_id</b> （用户ID）
+        userCategory（用户类别）
+        name （用户真实姓名）
+        sex（性别）
+        github_username （用户GitHub账号）
+        update_date （用户GitHub账号修改日期）
+        password （用户密码）
+        disable （用户是否禁用）
+    }
+    class students{
+        <b>student_id</b> （学号）
+        class （班级）
+        result_sum（成绩汇总）
+        web_sum （网站正确与否汇总）
+    }
+    class teachers{
+        <b>teacher_id</b> （教师工号）
+        department （教师所属部门）
+    }
+    class eduAdmin{
+        <b>eduAdmin_id</b> （教务管理员工号）
+        department （教务管理员所属单位）
+    }
+    class sysAdmin{
+        <b>sysAdmin_id</b> （系统管理员编号）
+        department （系统管理员所属部门）
+    }
+    students -up-|> Users:继承
+    teachers -left-|> Users:继承
+    eduAdmin -right-|> Users:继承
+    sysAdmin -up-|> Users:继承
+
+    class scoreItem{
+        <b>scoreItem_id</b> （评分项编号）
+        name (评分项名称)
+        standard (评分标准)
+        fullMarks (总分)
+        evaluate（评价）
+    }
+    class tests {
+        <b>test_id</b> （实验编号）
+        name (实验名称)
+        weight （权重）
+        date （提交截止时间）
+    }
+    class courses {
+        <b>courses_id</b> （课程代码）
+        name (课程名称)
+        desc (课程简介)
+        date （上课时间）
+        classroom（上课教室）
+    }
+    class grades {
+        <b>student_id</b> （学号）
+        <b>scoreItem_id</b> （评分项编号）
+        <b>test_id</b> （实验编号）
+        <b>courses_id</b> （课程代码）
+        result（总成绩）
+        test_result （实验分数）
+        scoreItem_result （评分项分数）
+        general_evaluation （综合评价）
+        update_date （评改日期）
+    }
+
+    students "1" .. "n"  grades
+    courses "1" .. "1"  grades
+    courses "1" .. "n"  tests
+    scoreItem "n" .. "1"  tests
+
+    teachers "1" .. "n"  courses
+
+    class release_courses{
+        <b>releaseCourses_id</b> （课程发布编号）
+        <b>eduAdmin_id</b> （发布管理员工号）
+        release_state （发布状态）
+        release_term （发布学期）
+        release_date （发布时间）
+    }
+    class teacherChoice_courses{
+        <b>teacherChoiceCourses_id</b> （教师选课代码）
+        <b>teacher_id</b> （选课教师工号）
+        teacherChoice_state （教师选课状态）
+        teacherChoice_date （教师选课时间）
+    }
+    class studentChoice_courses{
+        <b>studentChoiceCourses_id</b> （学生选课代码）
+        <b>student_id</b> （选课学生学号）
+        studentChoice_state （学生选课状态）
+        studentChoice_date （学生选课时间）
+    }
+
+    release_courses -up-|> courses:继承
+    teacherChoice_courses -right-|> release_courses:继承
+    studentChoice_courses --|> teacherChoice_courses:继承
+
+    eduAdmin "1" .. "n"  release_courses:发布
+    teachers "1" .. "n"  teacherChoice_courses:选课
+    students "1" .. "n"  studentChoice_courses:选课
+}
+
+
+@enduml

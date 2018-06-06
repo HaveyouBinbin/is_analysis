@@ -1,0 +1,33 @@
+@startuml
+title 基于GitHub的实验管理平台--查看用户信息用例的顺序图
+actor users
+users -> users: 查看用户信息
+alt 如果users是系统管理员
+	users -> sysAdmin
+	sysAdmin --> users:系统管理员的编号、真实姓名、\n性别、GitHub账号、GitHub账号\n修改日期和所属部门
+else 如果users是教务管理员
+    users -> eduAdmin
+    eduAdmin --> users:教务管理员的工号、真实姓名、性别、GitHub账号、\nGitHub账号修改日期和所属单位
+else 如果users是教师
+    users -> teachers
+    teachers --> users:教师的工号、真实姓名、性别、GitHub账号、GitHub账号修改日期\n和所属部门
+else 如果users是学生
+    users -> students
+    students --> users:学生的学号、真实姓名、性别、GitHub账号、GitHub账号修改日期和所属班级
+end
+
+skinparam sequence {
+	ArrowColor DeepSkyBlue
+	ActorBorderColor DeepSkyBlue
+	LifeLineBorderColor blue
+	LifeLineBackgroundColor #A9DCDF
+	ParticipantBorderColor DeepSkyBlue
+	ParticipantBackgroundColor DodgerBlue
+	ParticipantFontName Impact
+	ParticipantFontSize 17
+	ParticipantFontColor #A9DCDF
+	ActorBackgroundColor aqua
+	ActorFontSize 17
+	ActorFontName Aapex
+}
+@enduml
