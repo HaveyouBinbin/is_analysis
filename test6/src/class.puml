@@ -72,6 +72,11 @@ package 控制层：控制类 #FFFDDD {
     class Maintain<<Foo>>{
     }
     note right:Maintain类是维护类
+    class Login{
+    }
+    class Distinguish{
+    }
+    note right:识别用户角色类，用于用户查询某些信息需要针对不同用户返回不同信息
     class MaintainUserInfo{
     }
     class MaintainUsers{

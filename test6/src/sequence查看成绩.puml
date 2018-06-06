@@ -1,0 +1,87 @@
+@startuml
+title 基于GitHub的实验管理平台--查看成绩用例的顺序图
+actor User as U
+boundary "边界类\nqueryGradesWindow" as Q
+control 控制类Distinguish as D
+control QueryGrades as QG
+entity grades as G
+entity courses as C
+entity tests
+database "前端存储Cookie\nSessionStorage" as CS
+database 数据库存储 as SH
+
+U -> Q: 用户点击查询成绩
+activate U
+activate Q
+Q -> D: 识别用户角色请求
+activate D
+D -> CS: 识别用户角色，因为用户登录时将用户ID值写到Cookies['session']中，因此从Cookies中取数据
+activate CS
+CS --> D:返回用户ID，每次请求浏览器都会自动将Cookies['session']\n传给API服务Distinguish解析，让其知道是哪个用户的请求
+deactivate CS
+D --> U:返回用户角色，权限
+deactivate D
+U -> Q:选择课程
+Q -> QG:查询课程请求
+activate QG
+QG -> C:查询课程，如果用户选择了\n课程则按照课程查询成绩，\n如果没有选择则按照默认查询
+activate C
+
+alt 如果User是学生
+    C --> Q:返回学生已选择的课程
+    loop
+        Q -> QG: 查询成绩请求
+    note left:此处使用循环是因为\n用户会循环查看自己\n不同课程的成绩，\n其他用户也一样，\n不再重复说明
+        QG -> G: 查询成绩
+        activate G
+        G -> tests: 默认查询该课程的\n所有实验的成绩和评价
+        activate tests
+        tests -> SH: 查询数据库
+        activate SH
+        SH --> U: 返回该课程学生自己的实验成绩、评价和批改日期
+        deactivate SH
+        deactivate tests
+        deactivate G
+    end
+else 如果User是教师，教务管理员或者系统管理员
+    C --> Q:1.如果是教师，返回教师已选择的课程\n2.如果是教务管理员或系统管理员，返回所有课程
+    loop
+        Q -> QG: 查询成绩请求
+        QG -> G: 查询成绩
+        activate G
+        G -> tests: 默认查询该课程的\n所有实验的成绩和评价
+        activate tests
+        tests -> SH: 查询数据库
+        activate SH
+        SH --> U: 返回该课程所有学生的实验成绩、评价和批改日期
+        deactivate SH
+        deactivate tests
+        deactivate G
+    end
+end
+deactivate QG
+
+U -> Q: 退出请求
+deactivate C
+Q -> Q: 保存退出
+deactivate U
+destroy Q
+
+skinparam sequence {
+	ArrowColor DeepSkyBlue
+	ActorBorderColor DeepSkyBlue
+	LifeLineBorderColor blue
+	LifeLineBackgroundColor #A9DCDF
+
+	ParticipantBorderColor DeepSkyBlue
+	ParticipantBackgroundColor DodgerBlue
+	ParticipantFontName Impact
+	ParticipantFontSize 17
+	ParticipantFontColor #A9DCDF
+
+	ActorBackgroundColor aqua
+	ActorFontSize 17
+	ActorFontName Aapex
+}
+
+@enduml
