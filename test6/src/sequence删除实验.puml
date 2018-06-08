@@ -1,0 +1,45 @@
+@startuml
+title 基于GitHub的实验管理平台--删除实验用例的顺序图
+actor teachers as T
+boundary "边界类\nmaintainTestsWindow" as MTW
+control "控制类\nMaintainTests" as MT
+entity tests
+database 数据库存储 as SH
+
+activate T
+T -> MTW: 用户点击删除实验
+activate MTW
+MTW -> MT: 删除该课程的实验信息请求
+activate MT
+MT -> tests: 确认删除的实验信息
+activate tests
+tests -> SH: 数据库存储实验数据
+activate SH
+SH --> T:返回删除实验成功
+deactivate SH
+
+T -> MTW: 退出请求
+deactivate tests
+deactivate MT
+MTW -> MTW: 保存退出
+deactivate T
+destroy MTW
+
+skinparam sequence {
+	ArrowColor DeepSkyBlue
+	ActorBorderColor DeepSkyBlue
+	LifeLineBorderColor blue
+	LifeLineBackgroundColor #A9DCDF
+
+	ParticipantBorderColor DeepSkyBlue
+	ParticipantBackgroundColor DodgerBlue
+	ParticipantFontName Impact
+	ParticipantFontSize 17
+	ParticipantFontColor #A9DCDF
+
+	ActorBackgroundColor aqua
+	ActorFontSize 17
+	ActorFontName Aapex
+}
+
+@enduml

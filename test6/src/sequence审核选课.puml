@@ -1,0 +1,53 @@
+@startuml
+title 基于GitHub的实验管理平台--审核选课用例的顺序图
+actor eduAdmin as EA
+boundary "边界类\noperationCoursesWindow" as OCW
+control "控制类\nMaintainCourses" as MC
+entity studentChoice_courses as SCC
+database 数据库 as SH
+
+loop 教务管理员将多次循环审核选课
+activate EA
+EA -> OCW: 教务管理员点击审核选课
+activate OCW
+OCW -> MC: 审核选课请求
+activate MC
+MC -> SCC: 获取选课<b>时间已经截止，\n教师和学生都已经\n选课了的课程数据
+activate SCC
+SCC -> SH: 从数据库读取数据
+activate SH
+SH --> SCC: 数据库返回数据
+deactivate SH
+SCC --> EA: 返回教师和学生都已经选课的课程的信息、发布者选课教师和选课学生等的数据
+deactivate SCC
+EA -> MC: 判断是否开课
+MC -> SH: 数据库存储开课状态
+activate SH
+SH --> EA: 返回审核选课状态
+deactivate SH
+deactivate MC
+end
+EA -> OCW: 退出请求
+deactivate MC
+OCW -> OCW: 保存退出
+deactivate EA
+destroy OCW
+
+skinparam sequence {
+	ArrowColor DeepSkyBlue
+	ActorBorderColor DeepSkyBlue
+	LifeLineBorderColor blue
+	LifeLineBackgroundColor #A9DCDF
+
+	ParticipantBorderColor DeepSkyBlue
+	ParticipantBackgroundColor DodgerBlue
+	ParticipantFontName Impact
+	ParticipantFontSize 17
+	ParticipantFontColor #A9DCDF
+
+	ActorBackgroundColor aqua
+	ActorFontSize 17
+	ActorFontName Aapex
+}
+
+@enduml

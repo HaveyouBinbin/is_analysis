@@ -1,0 +1,45 @@
+@startuml
+title 基于GitHub的实验管理平台--添加用户用例的顺序图
+actor sysAdmin as SA
+boundary "边界类\nmaintainUsersWindow" as MUW
+control "控制类\nMaintainUsers" as MU
+entity users as U
+database 数据库存储 as SH
+
+activate SA
+SA -> MUW: 添加用户
+activate MUW
+MUW -> MU: 添加用户请求
+activate MU
+MU -> U: 提交请求
+activate U
+U -> SH: 录入添加后的用户信息到数据库保存，\n如果添加的是教务管理员信息，则保存教务管理员的基本信息；\n如果添加的是教师的信息，则保存教师的基本信息；\n如果添加的是学生的信息，则保存学生的基本信息；
+activate SH
+SH --> SA:根据系统管理员添加的用户信息返回数据
+deactivate SH
+
+SA -> MUW: 退出请求
+deactivate U
+deactivate MU
+MUW -> MUW: 保存退出
+deactivate SA
+destroy MUW
+
+skinparam sequence {
+	ArrowColor DeepSkyBlue
+	ActorBorderColor DeepSkyBlue
+	LifeLineBorderColor blue
+	LifeLineBackgroundColor #A9DCDF
+
+	ParticipantBorderColor DeepSkyBlue
+	ParticipantBackgroundColor DodgerBlue
+	ParticipantFontName Impact
+	ParticipantFontSize 17
+	ParticipantFontColor #A9DCDF
+
+	ActorBackgroundColor aqua
+	ActorFontSize 17
+	ActorFontName Aapex
+}
+
+@enduml

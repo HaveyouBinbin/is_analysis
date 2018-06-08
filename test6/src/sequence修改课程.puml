@@ -1,0 +1,45 @@
+@startuml
+title 基于GitHub的实验管理平台--修改课程用例的顺序图
+actor eduAdmin as EA
+boundary maintainCoursesWindow as MCW
+control MaintainCourses as MC
+entity courses as C
+database 数据库存储 as SH
+
+activate EA
+EA -> MCW: 用户修改课程
+activate MCW
+MCW -> MC: 修改课程请求
+activate MC
+MC -> C: 录入修改后的课程名称、简介等
+activate C
+C -> SH: 数据库存储课程数据
+activate SH
+SH --> EA:返回修改课程成功
+deactivate SH
+
+EA -> MCW: 退出请求
+deactivate C
+deactivate MC
+MCW -> MCW: 保存退出
+deactivate EA
+destroy MCW
+
+skinparam sequence {
+	ArrowColor DeepSkyBlue
+	ActorBorderColor DeepSkyBlue
+	LifeLineBorderColor blue
+	LifeLineBackgroundColor #A9DCDF
+
+	ParticipantBorderColor DeepSkyBlue
+	ParticipantBackgroundColor DodgerBlue
+	ParticipantFontName Impact
+	ParticipantFontSize 17
+	ParticipantFontColor #A9DCDF
+
+	ActorBackgroundColor aqua
+	ActorFontSize 17
+	ActorFontName Aapex
+}
+
+@enduml

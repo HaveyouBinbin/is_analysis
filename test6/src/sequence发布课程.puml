@@ -1,0 +1,61 @@
+@startuml
+title 基于GitHub的实验管理平台--发布课程用例的顺序图
+actor eduAdmin as EA
+boundary "边界类\noperationCoursesWindow" as OCW
+control "控制类\nMaintainCourses" as MC
+entity courses as C
+entity release_courses as RC
+database 数据库存储 as SH
+
+== 查看课程 ==
+activate EA
+EA -> OCW: 用户点击课程信息管理
+activate OCW
+OCW -> MC: 查询课程信息请求
+activate MC
+MC -> C: 识别用户角色，\n提交请求
+activate C
+C -> SH: 从数据库中获取数据
+activate SH
+SH --> EA:返回课程ID、名称、简介、上课时间和上课地点
+deactivate SH
+deactivate C
+
+== 发布课程 ==
+EA -> OCW: 用户点击发布课程
+OCW -> MC: 发布课程请求
+MC -> C: 系统自动获取\n发布课程的基本信息
+activate C
+C -> RC: 系统自动录入\n发布学期、发布者工号、\n姓名和发布时间
+activate RC
+RC -> SH: 数据库存储课程发布后的数据
+activate SH
+SH --> EA:返回发布成功
+deactivate RC
+deactivate SH
+
+EA -> OCW: 退出请求
+deactivate C
+deactivate MC
+OCW -> OCW: 保存退出
+deactivate EA
+destroy OCW
+
+skinparam sequence {
+	ArrowColor DeepSkyBlue
+	ActorBorderColor DeepSkyBlue
+	LifeLineBorderColor blue
+	LifeLineBackgroundColor #A9DCDF
+
+	ParticipantBorderColor DeepSkyBlue
+	ParticipantBackgroundColor DodgerBlue
+	ParticipantFontName Impact
+	ParticipantFontSize 17
+	ParticipantFontColor #A9DCDF
+
+	ActorBackgroundColor aqua
+	ActorFontSize 17
+	ActorFontName Aapex
+}
+
+@enduml

@@ -1,0 +1,66 @@
+@startuml
+title 基于GitHub的实验管理平台--选课用例的顺序图
+actor users as U
+boundary "边界类\noperationCoursesWindow" as OCW
+control "控制类\nMaintainCourses" as MC
+entity release_courses as RC
+entity teacherChoice_courses as TCC
+entity studentChoice_courses as SCC
+database 数据库存储 as SH
+
+loop 教师或学生将多次循环选课
+activate U
+U -> OCW: 用户点击选课
+activate OCW
+OCW -> MC: 选课请求
+activate MC
+alt 如果users是教师
+    MC -> RC: 教师用户角色，\n提交请求
+    activate RC
+    RC -> SH: 从数据库中获取<b>已发布课程的数据
+    activate SH
+    SH --> MC: 返回已发布课程的信息、发布者的信息等数据
+    deactivate RC
+    MC -> TCC: 录入选课教师的工号、姓名和选课时间
+    activate TCC
+    TCC -> SH: 数据库存储教师选课数据
+    deactivate TCC
+else 如果users是学生
+    MC -> TCC: 学生用户角色，提交请求
+    activate TCC
+    TCC -> SH: 从数据库中获取<b>已被教师选课的课程的数据
+    SH --> MC: 返回已被教师选课的课程的信息、选课教师的信息等数据
+    deactivate TCC
+    MC -> SCC: 录入选课学生的学号、姓名和选课时间
+    activate SCC
+    SCC -> SH: 数据库存储学生选课数据
+    deactivate SCC
+end
+SH --> U: 返回选课成功
+deactivate SH
+end
+U -> OCW: 退出请求
+deactivate RC
+deactivate MC
+OCW -> OCW: 保存退出
+deactivate U
+destroy OCW
+
+skinparam sequence {
+	ArrowColor DeepSkyBlue
+	ActorBorderColor DeepSkyBlue
+	LifeLineBorderColor blue
+	LifeLineBackgroundColor #A9DCDF
+
+	ParticipantBorderColor DeepSkyBlue
+	ParticipantBackgroundColor DodgerBlue
+	ParticipantFontName Impact
+	ParticipantFontSize 17
+	ParticipantFontColor #A9DCDF
+
+	ActorBackgroundColor aqua
+	ActorFontSize 17
+	ActorFontName Aapex
+}
+
+@enduml

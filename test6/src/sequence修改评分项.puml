@@ -1,0 +1,45 @@
+@startuml
+title 基于GitHub的实验管理平台--修改评分项用例的顺序图
+actor teachers as T
+boundary "边界类\nmaintainScoreItemWindow" as MSIW
+control "控制类\nMaintainScoreItem" as MSI
+entity ScoreItem as SI
+database 数据库存储 as SH
+
+activate T
+T -> MSIW: 修改评分项
+activate MSIW
+MSIW -> MSI: 修改该课程的实验的评分项信息请求
+activate MSI
+MSI -> SI: 录入修改后的评分项信息
+activate SI
+SI -> SH: 数据库存储修改后评分项数据
+activate SH
+SH --> T:返回修改评分项成功
+deactivate SH
+
+T -> MSIW: 退出请求
+deactivate SI
+deactivate MSI
+MSIW -> MSIW: 保存退出
+deactivate T
+destroy MSIW
+
+skinparam sequence {
+	ArrowColor DeepSkyBlue
+	ActorBorderColor DeepSkyBlue
+	LifeLineBorderColor blue
+	LifeLineBackgroundColor #A9DCDF
+
+	ParticipantBorderColor DeepSkyBlue
+	ParticipantBackgroundColor DodgerBlue
+	ParticipantFontName Impact
+	ParticipantFontSize 17
+	ParticipantFontColor #A9DCDF
+
+	ActorBackgroundColor aqua
+	ActorFontSize 17
+	ActorFontName Aapex
+}
+
+@enduml

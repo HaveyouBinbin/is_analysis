@@ -41,7 +41,7 @@
 ## 2. 系统总体结构
 ![](./image/系统总体结构.png)
 
-界面设计参见：https://zwdbox.github.io/is_analysis/test6/ui/index.html
+界面设计参见：https://haveyoubinbin.github.io/is_analysis/test6/ui/index.html
 
 ## 3. 用例图设计 [源码](src/UseCase.puml)
 - 说明：用例图中，最容易混淆的就是《include》和《extend》的用法。如何区分呢？如下说明：
@@ -57,14 +57,42 @@
 - ### [参见数据库设计](./数据库设计.md)
 
 ## 6. 用例及界面详细设计
-- ### [“学生列表”用例](./用例/学生列表.md),[界面](https://zwdbox.github.io/is_analysis/test6/ui/index.html)
-- ### [“评定成绩”用例](./用例/评定成绩.md),[界面](https://zwdbox.github.io/is_analysis/test6/ui/评定成绩.html)
-- ### [“查看成绩”用例](./用例/查看成绩.md),[界面](https://zwdbox.github.io/is_analysis/test6/ui/查看成绩.html)
-- ### [“修改密码”用例](./用例/修改密码.md),[界面](https://zwdbox.github.io/is_analysis/test6/ui/顶部菜单.html)
-- ### [“修改用户信息”用例](./用例/修改用户信息.md),[界面](https://zwdbox.github.io/is_analysis/test6/ui/顶部菜单.html)
-- ### [“查看用户信息”用例](./用例/查看用户信息.md),[界面](https://zwdbox.github.io/is_analysis/test6/ui/顶部菜单.html)
-- ### [“登出”用例](./用例/登出.md),[界面](https://zwdbox.github.io/is_analysis/test6/ui/顶部菜单.html)
-- ### [“登录”用例](./用例/登录.md),[界面](https://zwdbox.github.io/is_analysis/test6/ui/登录.html)
+- ### [“首页显示用户列表”用例](./用例/首页显示用户列表.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/index.html)
+- ### 用户管理类
+    - #### 用户操作管理类
+        * ##### [“登录”用例](./用例/登录.md),[界面](https://zwdbox.github.io/is_analysis/test6/ui/登录.html)
+        * ##### [“查看个人信息”用例](./用例/查看个人信息.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/查看个人信息.html)
+        * ##### [“修改个人信息”用例](./用例/修改个人信息.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/修改个人信息.html)
+        * ##### [“修改密码”用例](./用例/修改密码.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/修改密码.html)
+        * ##### [“登出”用例](./用例/登出.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/登出.html)
+    - #### 用户信息管理类
+        * ##### [“添加用户”用例](./用例/添加用户.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/添加用户.html)
+        * ##### [“查看用户”用例](./用例/查看用户.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/查看用户.html)
+        * ##### [“修改用户”用例](./用例/修改用户.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/成功用户.html)
+        * ##### [“删除用户”用例](./用例/删除用户.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/删除用户.html)
+- ### 课程管理类
+    - #### 课程信息管理类
+        * ##### [“添加课程”用例](./用例/添加课程.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/添加课程.html)
+        * ##### [“查看课程”用例](./用例/查看课程.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/查看课程.html)
+        * ##### [“修改课程”用例](./用例/修改课程.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/修改课程.html)
+        * ##### [“删除课程”用例](./用例/删除课程.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/删除课程.html)
+    - #### [“发布课程”用例](./用例/发布课程.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/发布课程.html)
+    - #### 选课管理类
+        * ##### [“选课”用例](./用例/选课.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/选课.html)
+        * ##### [“审核选课”用例](./用例/审核选课.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/审核选课.html)
+- ### 实验管理类
+    - #### [“添加实验”用例](./用例/添加实验.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/添加实验.html)
+    - #### [“查看实验”用例](./用例/查看实验.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/查看实验.html)
+    - #### [“修改实验”用例](./用例/修改实验.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/修改实验.html)
+    - #### [“删除实验”用例](./用例/删除实验.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/删除实验.html)
+- ### 评分项管理类
+    - #### [“添加评分项”用例](./用例/添加评分项.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/添加评分项.html)
+    - #### [“查看评分项”用例](./用例/查看评分项.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/查看评分项.html)
+    - #### [“修改评分项”用例](./用例/修改评分项.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/修改评分项.html)
+    - #### [“删除评分项”用例](./用例/删除评分项.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/删除评分项.html)
+- ### 评分项管理类
+    - #### [“评定成绩”用例](./用例/评定成绩.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/评定成绩.html)
+    - #### [“查看成绩”用例](./用例/查看成绩.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/查看成绩.html)
 
 ## 7. 参考文献
 - 绘制方法参考[PlantUML标准](http://plantuml.com)

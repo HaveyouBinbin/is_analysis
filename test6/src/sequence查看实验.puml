@@ -1,0 +1,45 @@
+@startuml
+title 基于GitHub的实验管理平台--查看实验用例的顺序图
+actor teachers as T
+boundary "边界类\nmaintainTestsWindow" as MTW
+control "控制类\nMaintainTests" as MT
+entity tests
+database 数据库存储 as SH
+
+activate T
+T -> MTW: 用户点击实验管理
+activate MTW
+MTW -> MT: 查询该课程的实验信息请求
+activate MT
+MT -> tests: 识别用户角色，提交请求
+activate tests
+tests -> SH: 从数据库中获取数据
+activate SH
+SH --> T:返回实验基本信息
+deactivate SH
+
+T -> MTW: 退出请求
+deactivate tests
+deactivate MT
+MTW -> MTW: 保存退出
+deactivate T
+destroy MTW
+
+skinparam sequence {
+	ArrowColor DeepSkyBlue
+	ActorBorderColor DeepSkyBlue
+	LifeLineBorderColor blue
+	LifeLineBackgroundColor #A9DCDF
+
+	ParticipantBorderColor DeepSkyBlue
+	ParticipantBackgroundColor DodgerBlue
+	ParticipantFontName Impact
+	ParticipantFontSize 17
+	ParticipantFontColor #A9DCDF
+
+	ActorBackgroundColor aqua
+	ActorFontSize 17
+	ActorFontName Aapex
+}
+
+@enduml

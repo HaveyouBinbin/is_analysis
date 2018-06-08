@@ -1,0 +1,45 @@
+@startuml
+title 基于GitHub的实验管理平台--删除用户用例的顺序图
+actor sysAdmin as SA
+boundary "边界类\nmaintainUsersWindow" as MUW
+control "控制类\nMaintainUsers" as MU
+entity users as U
+database 数据库存储 as SH
+
+activate SA
+SA -> MUW: 删除用户
+activate MUW
+MUW -> MU: 删除用户请求
+activate MU
+MU -> U: 确认删除的用户信息
+activate U
+U -> SH: 数据库存储实验数据
+activate SH
+SH --> SA:根据系统管理员删除的用户信息返回数据
+deactivate SH
+
+SA -> MUW: 退出请求
+deactivate U
+deactivate MU
+MUW -> MUW: 保存退出
+deactivate SA
+destroy MUW
+
+skinparam sequence {
+	ArrowColor DeepSkyBlue
+	ActorBorderColor DeepSkyBlue
+	LifeLineBorderColor blue
+	LifeLineBackgroundColor #A9DCDF
+
+	ParticipantBorderColor DeepSkyBlue
+	ParticipantBackgroundColor DodgerBlue
+	ParticipantFontName Impact
+	ParticipantFontSize 17
+	ParticipantFontColor #A9DCDF
+
+	ActorBackgroundColor aqua
+	ActorFontSize 17
+	ActorFontName Aapex
+}
+
+@enduml

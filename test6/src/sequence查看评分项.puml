@@ -1,0 +1,45 @@
+@startuml
+title 基于GitHub的实验管理平台--查看评分项用例的顺序图
+actor teachers as T
+boundary "边界类\nmaintainScoreItemWindow" as MSIW
+control "控制类\nMaintainScoreItem" as MSI
+entity ScoreItem as SI
+database 数据库存储 as SH
+
+activate T
+T -> MSIW: 用户点击评分项管理
+activate MSIW
+MSIW -> MSI: 查询该课程的实验的评分项信息请求
+activate MSI
+MSI -> SI: 识别用户角色，提交请求
+activate SI
+SI -> SH: 从数据库中获取数据
+activate SH
+SH --> T:返回实验的评分项基本信息
+deactivate SH
+
+T -> MSIW: 退出请求
+deactivate SI
+deactivate MSI
+MSIW -> MSIW: 保存退出
+deactivate T
+destroy MSIW
+
+skinparam sequence {
+	ArrowColor DeepSkyBlue
+	ActorBorderColor DeepSkyBlue
+	LifeLineBorderColor blue
+	LifeLineBackgroundColor #A9DCDF
+
+	ParticipantBorderColor DeepSkyBlue
+	ParticipantBackgroundColor DodgerBlue
+	ParticipantFontName Impact
+	ParticipantFontSize 17
+	ParticipantFontColor #A9DCDF
+
+	ActorBackgroundColor aqua
+	ActorFontSize 17
+	ActorFontName Aapex
+}
+
+@enduml
