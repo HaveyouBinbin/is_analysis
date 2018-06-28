@@ -90,7 +90,7 @@
     - #### [“查看评分项”用例](./用例/查看评分项.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/查看评分项.html)
     - #### [“修改评分项”用例](./用例/修改评分项.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/修改评分项.html)
     - #### [“删除评分项”用例](./用例/删除评分项.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/删除评分项.html)
-- ### 评分项管理类
+- ### 成绩管理类
     - #### [“评定成绩”用例](./用例/评定成绩.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/评定成绩.html)
     - #### [“查看成绩”用例](./用例/查看成绩.md),[界面](https://haveyoubinbin.github.io/is_analysis/test6/ui/查看成绩.html)
 
